@@ -1,0 +1,568 @@
+/* Portfolio Page Styles */
+.portfolio-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Portfolio Summary Cards */
+.portfolio-summary {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.summary-card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.2s ease;
+}
+
+.summary-card:hover {
+  border-color: var(--accent-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.summary-card.main-balance {
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(59, 130, 246, 0.1) 100%);
+}
+
+.summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.summary-header h2 {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.summary-header h3 {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.summary-icon {
+  color: var(--text-muted);
+}
+
+.summary-icon.positive {
+  color: var(--profit-green);
+}
+
+.summary-icon.negative {
+  color: var(--loss-red);
+}
+
+.summary-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.main-value {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.value {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.value.positive {
+  color: var(--profit-green);
+}
+
+.value.negative {
+  color: var(--loss-red);
+}
+
+.sub-value {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.change-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.change-indicator.positive {
+  color: var(--profit-green);
+}
+
+.change-indicator.negative {
+  color: var(--loss-red);
+}
+
+.change-percent {
+  font-weight: 600;
+}
+
+.change-amount {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* Portfolio Grid Layout */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+/* Portfolio Chart */
+.portfolio-chart-container {
+  grid-column: 1 / -1;
+}
+
+.portfolio-chart {
+  height: 400px;
+}
+
+.chart-container {
+  height: 320px;
+  margin-top: 16px;
+}
+
+.chart-timeframe {
+  display: flex;
+  gap: 4px;
+}
+
+.timeframe-btn {
+  padding: 6px 12px;
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.timeframe-btn:hover {
+  background-color: var(--hover-bg);
+  color: var(--text-primary);
+}
+
+.timeframe-btn.active {
+  background-color: var(--accent-blue);
+  color: white;
+  border-color: var(--accent-blue);
+}
+
+/* Token List */
+.token-list-container {
+  grid-column: 1 / -1;
+}
+
+.token-count {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.table-container {
+  overflow-x: auto;
+  margin-top: 16px;
+}
+
+.token-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.token-table th {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border-color);
+  user-select: none;
+}
+
+.token-table th.sortable {
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.token-table th.sortable:hover {
+  color: var(--text-primary);
+}
+
+.token-table th span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sort-icon {
+  opacity: 0.3;
+  transition: opacity 0.2s ease;
+}
+
+.sort-icon.active {
+  opacity: 1;
+  color: var(--accent-blue);
+}
+
+.token-row {
+  border-bottom: 1px solid rgba(64, 64, 64, 0.3);
+  transition: background-color 0.2s ease;
+}
+
+.token-row:hover {
+  background-color: var(--hover-bg);
+}
+
+.token-table td {
+  padding: 16px;
+  vertical-align: middle;
+}
+
+.token-info {
+  min-width: 200px;
+}
+
+.token-details {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.token-logo {
+  font-size: 24px;
+  width: 32px;
+  text-align: center;
+}
+
+.token-name {
+  font-weight: 500;
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.token-symbol {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.token-price {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.balance-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.balance-symbol {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.token-value {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.token-change {
+  font-weight: 500;
+}
+
+.token-change.positive {
+  color: var(--profit-green);
+}
+
+.token-change.negative {
+  color: var(--loss-red);
+}
+
+.change-content {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.allocation-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 80px;
+}
+
+.allocation-bar {
+  width: 60px;
+  height: 4px;
+  background-color: var(--bg-tertiary);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.allocation-fill {
+  height: 100%;
+  background-color: var(--accent-blue);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.btn-sm {
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.btn-icon {
+  padding: 4px;
+  min-width: auto;
+}
+
+/* Recent Transactions */
+.transactions-container {
+  grid-column: 1 / -1;
+}
+
+.transactions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-top: 16px;
+}
+
+.transaction-item {
+  background-color: var(--bg-tertiary);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.transaction-item:hover {
+  background-color: var(--hover-bg);
+}
+
+.transaction-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+}
+
+.transaction-type {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.transaction-icon {
+  padding: 8px;
+  border-radius: 8px;
+  background-color: var(--bg-secondary);
+}
+
+.transaction-icon.buy {
+  color: var(--profit-green);
+  background-color: rgba(16, 185, 129, 0.1);
+}
+
+.transaction-icon.sell {
+  color: var(--loss-red);
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+.transaction-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.transaction-action {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.action-text {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.action-text.buy {
+  color: var(--profit-green);
+}
+
+.action-text.sell {
+  color: var(--loss-red);
+}
+
+.transaction-token {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.transaction-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.transaction-amount {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.amount {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.amount.buy {
+  color: var(--loss-red);
+}
+
+.amount.sell {
+  color: var(--profit-green);
+}
+
+.transaction-status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+}
+
+.status-icon.completed {
+  color: var(--profit-green);
+}
+
+.status-icon.pending {
+  color: var(--text-muted);
+}
+
+.status-text {
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+.status-text.completed {
+  color: var(--profit-green);
+}
+
+.status-text.pending {
+  color: var(--text-muted);
+}
+
+/* Empty State */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.empty-state h4 {
+  margin: 16px 0 8px 0;
+  color: var(--text-secondary);
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .portfolio-summary {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio-summary {
+    grid-template-columns: 1fr;
+  }
+  
+  .main-value {
+    font-size: 28px;
+  }
+  
+  .value {
+    font-size: 20px;
+  }
+  
+  .portfolio-chart {
+    height: 300px;
+  }
+  
+  .chart-container {
+    height: 240px;
+  }
+  
+  .token-table {
+    font-size: 14px;
+  }
+  
+  .token-table td {
+    padding: 12px 8px;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .transaction-main {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .transaction-amount {
+    align-items: flex-start;
+  }
+}
