@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Search, Bell, Settings, Wallet, ChevronDown } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { Search, Bell, Settings, Wallet, Star, Calendar, User } from 'lucide-react';
 
 const TopBar = () => {
   const [walletConnected, setWalletConnected] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [notifications, setNotifications] = useState(3);
+  const location = useLocation();
 
   const mockWalletBalance = {
     address: '0x1234...5678',
@@ -12,65 +14,115 @@ const TopBar = () => {
     usdValue: 3287.50
   };
 
+  const navItems = [
+    { name: 'Discover', path: '/discover' },
+    { name: 'Pulse', path: '/pulse' },
+    { name: 'Trackers', path: '/trackers' },
+    { name: 'Perpetuals', path: '/trading' },
+    { name: 'Yield', path: '/yield' },
+    { name: 'Vision', path: '/vision' },
+    { name: 'Portfolio', path: '/' },
+    { name: 'Rewards', path: '/rewards' }
+  ];
+
   const handleWalletConnect = () => {
     setWalletConnected(!walletConnected);
   };
 
   return (
-    <header className="topbar">
+    <header className="modern-topbar">
       <div className="topbar-left">
         <div className="logo">
-          <h1>CryptoTrader Pro</h1>
+          <span className="logo-icon">▲</span>
+          <span className="logo-text">Axiom</span>
         </div>
         
-        <div className="search-container">
-          <Search className="search-icon" size={20} />
-          <input
-            type="text"
+        <nav className="main-nav">
+          {navItems.map((item) => (
+            <Link 
+              key={item.name}
+              to={item.path} 
+              className={`nav-link ${
+                (location.pathname === item.path || 
+                 (item.path === '/' && (location.pathname === '/' || location.pathname === '/portfolio')))
+                ? 'active' : ''
+              }`}
+            >
+              {item.name}
+            </Link>
+          ))}
+        </nav>
+      </div>
+      
+      <div className="topbar-center">
+        <div className="search-container-modern">
+          <Search className="search-icon" size={18} />
+          <input 
+            type="text" 
+            className="search-input-modern" 
             placeholder="Search tokens, pairs, or addresses..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="search-input"
           />
         </div>
       </div>
 
       <div className="topbar-right">
-        <div className="notifications">
-          <button className="notification-btn">
-            <Bell size={20} />
-            {notifications > 0 && (
-              <span className="notification-badge">{notifications}</span>
-            )}
-          </button>
+        <div className="quick-stats">
+          <div className="stat-item">
+            <span className="stat-label">ETH</span>
+            <span className="stat-value positive">+2.56%</span>
+          </div>
+          <div className="stat-item">
+            <span className="stat-label">BTC</span>
+            <span className="stat-value positive">+1.34%</span>
+          </div>
+          <div className="stat-item">
+            <span className="stat-label">SOL</span>
+            <span className="stat-value negative">-1.45%</span>
+          </div>
         </div>
 
-        <div className="wallet-section">
-          {walletConnected ? (
-            <div className="wallet-info">
-              <div className="wallet-balance">
-                <span className="balance">{mockWalletBalance.balance} ETH</span>
-                <span className="usd-value">${mockWalletBalance.usdValue.toLocaleString()}</span>
-              </div>
-              <div className="wallet-address">
-                <Wallet size={16} />
-                <span>{mockWalletBalance.address}</span>
-                <ChevronDown size={16} />
-              </div>
+        {walletConnected ? (
+          <div className="wallet-connected">
+            <div className="wallet-balance-modern">
+              <span className="balance">${mockWalletBalance.usdValue.toLocaleString()}</span>
             </div>
-          ) : (
-            <button 
-              className="btn btn-primary"
-              onClick={handleWalletConnect}
-            >
-              <Wallet size={16} />
-              Connect Wallet
-            </button>
-          )}
-        </div>
+            <div className="wallet-address-modern">
+              <Wallet size={14} />
+              <span>{mockWalletBalance.address}</span>
+            </div>
+          </div>
+        ) : (
+          <button 
+            className="connect-wallet-btn"
+            onClick={handleWalletConnect}
+          >
+            Connect Wallet
+          </button>
+        )}
 
-        <button className="settings-btn">
-          <Settings size={20} />
+        <button className="icon-btn favorites-btn">
+          <Star size={18} />
+        </button>
+        
+        <button className="icon-btn notifications-btn">
+          <Bell size={18} />
+          {notifications > 0 && (
+            <span className="notification-badge">{notifications}</span>
+          )}
+        </button>
+        
+        <button className="icon-btn calendar-btn">
+          <Calendar size={18} />
+        </button>
+        
+        <button className="icon-btn profile-btn">
+          <User size={18} />
+        </button>
+        
+        <button className="icon-btn settings-btn">
+          <Settings size={18} />
         </button>
       </div>
     </header>

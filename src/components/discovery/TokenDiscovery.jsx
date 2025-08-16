@@ -62,127 +62,248 @@ const TokenDiscovery = () => {
   const topGainersCount = tokens.filter(t => t.change24h > 5).length;
 
   return (
-    <div className="token-discovery-page">
-      <div className="discovery-header">
-        <div className="header-content">
-          <h1>Token Discovery</h1>
-          <p>Discover trending and promising cryptocurrency tokens</p>
-        </div>
-        
-        <div className="discovery-stats">
-          <div className="stat-item">
-            <TrendingUp className="stat-icon trending" size={16} />
-            <span className="stat-value">{trendingCount}</span>
-            <span className="stat-label">Trending</span>
+    <div className="modern-pulse-page">
+      {/* Pulse Header */}
+      <div className="pulse-header">
+        <h1>Pulse</h1>
+        <div className="pulse-controls">
+          <div className="display-controls">
+            <button className="display-btn active">
+              <span className="display-icon">≡</span>
+              <span>Display</span>
+              <span className="chevron">⌄</span>
+            </button>
+            <button className="sound-btn">
+              <span className="sound-icon">🔊</span>
+            </button>
+            <button className="settings-btn">
+              <span className="settings-icon">⚙</span>
+            </button>
           </div>
-          <div className="stat-item">
-            <Zap className="stat-icon new" size={16} />
-            <span className="stat-value">{newCount}</span>
-            <span className="stat-label">New</span>
-          </div>
-          <div className="stat-item">
-            <TrendingUp className="stat-icon gainers" size={16} />
-            <span className="stat-value">{topGainersCount}</span>
-            <span className="stat-label">Top Gainers</span>
+          <div className="quick-buy">
+            <button className="quick-buy-btn">
+              <span>Quick Buy 0.0</span>
+              <span className="quick-buy-icon">≡</span>
+            </button>
           </div>
         </div>
       </div>
 
-      <div className="discovery-content">
-        <div className="discovery-controls">
-          {/* Search Bar */}
-          <div className="search-section">
-            <div className="search-container">
-              <Search className="search-icon" size={20} />
-              <input
-                type="text"
-                placeholder="Search tokens by name or symbol..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="search-input"
-              />
+      {/* Pulse Sections */}
+      <div className="pulse-sections">
+        {/* New Pairs Section */}
+        <div className="pulse-section">
+          <div className="section-header">
+            <div className="section-title">
+              <span className="section-icon">⚡</span>
+              <span>New Pairs</span>
+              <span className="count-badge">0</span>
             </div>
-          </div>
-
-          {/* Category Filters */}
-          <div className="filter-section">
-            <TokenFilters
-              categories={categories}
-              activeCategory={activeCategory}
-              onCategoryChange={setActiveCategory}
-              sortBy={sortBy}
-              onSortChange={setSortBy}
-              viewMode={viewMode}
-              onViewModeChange={setViewMode}
-            />
-          </div>
-        </div>
-
-        {/* Results Info */}
-        <div className="results-info">
-          <div className="results-count">
-            Showing {filteredTokens.length} tokens
-            {searchTerm && (
-              <span className="search-term"> for "{searchTerm}"</span>
-            )}
-            {activeCategory !== 'all' && (
-              <span className="category-filter"> in {activeCategory}</span>
-            )}
+            <div className="section-controls">
+              <button className="preset-btn active">≡ P1</button>
+              <button className="preset-btn">P2</button>
+              <button className="preset-btn">P3</button>
+              <button className="sort-btn">
+                <span>≡</span>
+              </button>
+            </div>
           </div>
           
-          <div className="view-controls">
-            <button
-              className={`view-btn ${viewMode === 'grid' ? 'active' : ''}`}
-              onClick={() => setViewMode('grid')}
-              title="Grid View"
-            >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                <rect x="1" y="1" width="6" height="6" rx="1"/>
-                <rect x="9" y="1" width="6" height="6" rx="1"/>
-                <rect x="1" y="9" width="6" height="6" rx="1"/>
-                <rect x="9" y="9" width="6" height="6" rx="1"/>
-              </svg>
-            </button>
-            <button
-              className={`view-btn ${viewMode === 'list' ? 'active' : ''}`}
-              onClick={() => setViewMode('list')}
-              title="List View"
-            >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                <rect x="2" y="3" width="12" height="2" rx="1"/>
-                <rect x="2" y="7" width="12" height="2" rx="1"/>
-                <rect x="2" y="11" width="12" height="2" rx="1"/>
-              </svg>
-            </button>
+          <div className="token-grid">
+            {filteredTokens.slice(0, 6).map((token) => (
+              <div key={token.id} className="token-card new-pair">
+                <div className="token-header">
+                  <div className="token-info">
+                    <span className="token-logo">{token.logo}</span>
+                    <div className="token-details">
+                      <div className="token-symbol">{token.symbol}</div>
+                      <div className="token-name">{token.name.slice(0, 10)}...</div>
+                    </div>
+                  </div>
+                  <div className="token-actions">
+                    <button className="watch-btn">👁</button>
+                    <button className="more-btn">⚙</button>
+                  </div>
+                </div>
+                
+                <div className="token-metrics">
+                  <div className="metric">
+                    <span className="metric-label">MC</span>
+                    <span className="metric-value">${(token.marketCap / 1000000).toFixed(1)}M</span>
+                  </div>
+                  <div className="metric">
+                    <span className="metric-label">v</span>
+                    <span className="metric-value">${(token.volume24h / 1000).toFixed(0)}K</span>
+                  </div>
+                </div>
+
+                <div className="token-chart">
+                  <div className="mini-chart">
+                    <svg width="100%" height="40" viewBox="0 0 100 40">
+                      <path
+                        d="M5,35 Q25,20 45,25 T85,15"
+                        stroke={token.change24h > 0 ? "#10b981" : "#ef4444"}
+                        strokeWidth="2"
+                        fill="none"
+                      />
+                    </svg>
+                  </div>
+                </div>
+
+                <div className="token-footer">
+                  <div className="token-time">
+                    <span className="age">0s</span>
+                    <span className="chain-icon">🔗</span>
+                    <span className="volume">💧 {token.change24h > 0 ? '+' : ''}{token.change24h.toFixed(1)}%</span>
+                  </div>
+                  <button className="buy-btn">Buy</button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Token Grid/List */}
-        <div className="tokens-container">
-          <TokenGrid 
-            tokens={filteredTokens}
-            viewMode={viewMode}
-          />
-        </div>
-
-        {/* Quick Actions */}
-        <div className="quick-actions">
-          <div className="action-section">
-            <h3>Quick Actions</h3>
-            <div className="action-buttons">
-              <button className="action-btn trending-btn">
-                <TrendingUp size={16} />
-                View All Trending
-              </button>
-              <button className="action-btn new-btn">
-                <Zap size={16} />
-                View New Tokens
-              </button>
-              <button className="action-btn filter-btn">
-                <Filter size={16} />
-                Advanced Filters
+        {/* Final Stretch Section */}
+        <div className="pulse-section">
+          <div className="section-header">
+            <div className="section-title">
+              <span className="section-icon">⏰</span>
+              <span>Final Stretch</span>
+              <span className="count-badge">0</span>
+            </div>
+            <div className="section-controls">
+              <button className="preset-btn active">≡ P1</button>
+              <button className="preset-btn">P2</button>
+              <button className="preset-btn">P3</button>
+              <button className="sort-btn">
+                <span>≡</span>
               </button>
             </div>
+          </div>
+          
+          <div className="token-grid">
+            {filteredTokens.slice(6, 12).map((token) => (
+              <div key={token.id} className="token-card final-stretch">
+                <div className="token-header">
+                  <div className="token-info">
+                    <span className="token-logo">{token.logo}</span>
+                    <div className="token-details">
+                      <div className="token-symbol">{token.symbol}</div>
+                      <div className="token-name">{token.name.slice(0, 10)}...</div>
+                    </div>
+                  </div>
+                  <div className="token-actions">
+                    <button className="watch-btn">👁</button>
+                    <button className="more-btn">⚙</button>
+                  </div>
+                </div>
+                
+                <div className="token-metrics">
+                  <div className="metric">
+                    <span className="metric-label">MC</span>
+                    <span className="metric-value">${(token.marketCap / 1000000).toFixed(1)}M</span>
+                  </div>
+                  <div className="metric">
+                    <span className="metric-label">v</span>
+                    <span className="metric-value">${(token.volume24h / 1000).toFixed(0)}K</span>
+                  </div>
+                </div>
+
+                <div className="token-chart">
+                  <div className="mini-chart">
+                    <svg width="100%" height="40" viewBox="0 0 100 40">
+                      <path
+                        d="M5,35 Q25,30 45,15 T85,10"
+                        stroke={token.change24h > 0 ? "#10b981" : "#ef4444"}
+                        strokeWidth="2"
+                        fill="none"
+                      />
+                    </svg>
+                  </div>
+                </div>
+
+                <div className="token-footer">
+                  <div className="token-time">
+                    <span className="age">6h</span>
+                    <span className="chain-icon">🔗</span>
+                    <span className="volume">💧 {token.change24h > 0 ? '+' : ''}{token.change24h.toFixed(1)}%</span>
+                  </div>
+                  <button className="buy-btn">Buy</button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Migrated Section */}
+        <div className="pulse-section">
+          <div className="section-header">
+            <div className="section-title">
+              <span className="section-icon">🔄</span>
+              <span>Migrated</span>
+              <span className="count-badge">0</span>
+            </div>
+            <div className="section-controls">
+              <button className="preset-btn active">≡ P1</button>
+              <button className="preset-btn">P2</button>
+              <button className="preset-btn">P3</button>
+              <button className="sort-btn">
+                <span>≡</span>
+              </button>
+            </div>
+          </div>
+          
+          <div className="token-grid">
+            {filteredTokens.slice(12, 18).map((token) => (
+              <div key={token.id} className="token-card migrated">
+                <div className="token-header">
+                  <div className="token-info">
+                    <span className="token-logo">{token.logo}</span>
+                    <div className="token-details">
+                      <div className="token-symbol">{token.symbol}</div>
+                      <div className="token-name">{token.name.slice(0, 10)}...</div>
+                    </div>
+                  </div>
+                  <div className="token-actions">
+                    <button className="watch-btn">👁</button>
+                    <button className="more-btn">⚙</button>
+                  </div>
+                </div>
+                
+                <div className="token-metrics">
+                  <div className="metric">
+                    <span className="metric-label">MC</span>
+                    <span className="metric-value">${(token.marketCap / 1000000).toFixed(1)}M</span>
+                  </div>
+                  <div className="metric">
+                    <span className="metric-label">v</span>
+                    <span className="metric-value">${(token.volume24h / 1000).toFixed(0)}K</span>
+                  </div>
+                </div>
+
+                <div className="token-chart">
+                  <div className="mini-chart">
+                    <svg width="100%" height="40" viewBox="0 0 100 40">
+                      <path
+                        d="M5,25 Q25,15 45,20 T85,18"
+                        stroke={token.change24h > 0 ? "#10b981" : "#ef4444"}
+                        strokeWidth="2"
+                        fill="none"
+                      />
+                    </svg>
+                  </div>
+                </div>
+
+                <div className="token-footer">
+                  <div className="token-time">
+                    <span className="age">1m</span>
+                    <span className="chain-icon">🔗</span>
+                    <span className="volume">💧 {token.change24h > 0 ? '+' : ''}{token.change24h.toFixed(1)}%</span>
+                  </div>
+                  <button className="buy-btn">Buy</button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

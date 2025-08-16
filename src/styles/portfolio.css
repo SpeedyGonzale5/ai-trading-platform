@@ -1,8 +1,257 @@
-/* Portfolio Page Styles */
+/* Modern Portfolio Page Styles */
+.modern-portfolio-page {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 16px;
+  background: linear-gradient(135deg, var(--bg-primary) 0%, #0c1220 100%);
+  border-radius: 16px;
+  box-shadow: var(--shadow-xl);
+}
+
+/* Portfolio Stats Grid */
+.portfolio-stats-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  background: linear-gradient(145deg, 
+    rgba(255, 255, 255, 0.08) 0%, 
+    rgba(255, 255, 255, 0.03) 50%,
+    rgba(255, 255, 255, 0.01) 100%
+  ), var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 28px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--border-highlight);
+  background: linear-gradient(145deg, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.02) 100%
+  ), var(--bg-card);
+}
+
+.stat-card.main-portfolio {
+  background: linear-gradient(145deg, 
+    rgba(96, 165, 250, 0.1) 0%, 
+    rgba(96, 165, 250, 0.05) 50%,
+    rgba(255, 255, 255, 0.02) 100%
+  ), var(--bg-card);
+  border: 1px solid var(--border-highlight);
+}
+
+.stat-card.main-portfolio::before {
+  background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+  opacity: 0.3;
+}
+
+.stat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.stat-header::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-blue), var(--profit-green));
+  border-radius: 1px;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.stat-icon {
+  color: var(--text-muted);
+}
+
+.stat-icon.positive {
+  color: var(--profit-green);
+}
+
+.stat-main {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.main-portfolio .stat-value {
+  font-size: 36px;
+}
+
+.stat-value.positive {
+  color: var(--profit-green);
+}
+
+.stat-value.negative {
+  color: var(--loss-red);
+}
+
+.stat-change {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.stat-change.positive {
+  color: var(--profit-green);
+}
+
+.stat-change.negative {
+  color: var(--loss-red);
+}
+
+.stat-subtitle {
+  font-size: 16px;
+  color: var(--text-muted);
+}
+
+/* Section Styling */
+.portfolio-performance-section,
+.holdings-section {
+  background: linear-gradient(145deg, 
+    rgba(255, 255, 255, 0.06) 0%, 
+    rgba(255, 255, 255, 0.02) 50%,
+    rgba(255, 255, 255, 0.01) 100%
+  ), var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  position: relative;
+}
+
+.portfolio-performance-section::before,
+.holdings-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 28px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.section-header h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.time-selector {
+  display: flex;
+  gap: 6px;
+}
+
+.time-btn {
+  padding: 10px 16px;
+  background: linear-gradient(145deg, 
+    rgba(255, 255, 255, 0.05) 0%, 
+    rgba(255, 255, 255, 0.02) 100%
+  ), var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.time-btn:hover {
+  background: linear-gradient(145deg, 
+    rgba(255, 255, 255, 0.08) 0%, 
+    rgba(255, 255, 255, 0.04) 100%
+  ), var(--bg-tertiary);
+  color: var(--text-primary);
+  border-color: var(--border-highlight);
+}
+
+.time-btn.active {
+  background: linear-gradient(145deg, var(--accent-blue), var(--accent-blue-hover));
+  color: #0b0f1a;
+  border-color: var(--accent-blue);
+  box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
+}
+
+.chart-container {
+  height: 420px;
+  padding: 24px 28px;
+}
+
+.holdings-info {
+  font-size: 16px;
+  color: var(--text-muted);
+}
+
+.holdings-table {
+  /* Remove padding since TokenList will handle its own styling */
+}
+
+/* Portfolio Page Styles - Legacy */
 .portfolio-page {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 32px;
   max-width: 1400px;
   margin: 0 auto;
 }
@@ -11,16 +260,16 @@
 .portfolio-summary {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 24px;
+  gap: 24px;
+  margin-bottom: 32px;
 }
 
 .summary-card {
   background-color: var(--bg-secondary);
   border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 20px;
-  transition: all 0.2s ease;
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .summary-card:hover {
@@ -37,18 +286,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .summary-header h2 {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
   color: var(--text-secondary);
   margin: 0;
 }
 
 .summary-header h3 {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   color: var(--text-secondary);
   margin: 0;
@@ -69,18 +318,18 @@
 .summary-content {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .main-value {
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 700;
   color: var(--text-primary);
   line-height: 1.2;
 }
 
 .value {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 600;
   color: var(--text-primary);
   line-height: 1.2;
@@ -95,15 +344,15 @@
 }
 
 .sub-value {
-  font-size: 14px;
+  font-size: 16px;
   color: var(--text-muted);
 }
 
 .change-indicator {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 14px;
+  gap: 8px;
+  font-size: 16px;
   font-weight: 500;
 }
 
@@ -128,8 +377,8 @@
 .portfolio-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  margin-bottom: 24px;
+  gap: 32px;
+  margin-bottom: 32px;
 }
 
 /* Portfolio Chart */
@@ -138,28 +387,28 @@
 }
 
 .portfolio-chart {
-  height: 400px;
+  height: 420px;
 }
 
 .chart-container {
-  height: 320px;
-  margin-top: 16px;
+  height: 340px;
+  margin-top: 20px;
 }
 
 .chart-timeframe {
   display: flex;
-  gap: 4px;
+  gap: 6px;
 }
 
 .timeframe-btn {
-  padding: 6px 12px;
+  padding: 8px 14px;
   background: none;
   border: 1px solid var(--border-color);
-  border-radius: 6px;
+  border-radius: 8px;
   color: var(--text-secondary);
-  font-size: 12px;
+  font-size: 14px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .timeframe-btn:hover {
@@ -179,13 +428,13 @@
 }
 
 .token-count {
-  font-size: 14px;
+  font-size: 16px;
   color: var(--text-muted);
 }
 
 .table-container {
   overflow-x: auto;
-  margin-top: 16px;
+  margin-top: 20px;
 }
 
 .token-table {
@@ -195,8 +444,8 @@
 
 .token-table th {
   text-align: left;
-  padding: 12px 16px;
-  font-size: 12px;
+  padding: 14px 18px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--text-muted);
   text-transform: uppercase;
@@ -207,7 +456,7 @@
 
 .token-table th.sortable {
   cursor: pointer;
-  transition: color 0.2s ease;
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .token-table th.sortable:hover {
@@ -217,12 +466,12 @@
 .token-table th span {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
 }
 
 .sort-icon {
   opacity: 0.3;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .sort-icon.active {
@@ -232,7 +481,7 @@
 
 .token-row {
   border-bottom: 1px solid rgba(64, 64, 64, 0.3);
-  transition: background-color 0.2s ease;
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .token-row:hover {
@@ -240,34 +489,34 @@
 }
 
 .token-table td {
-  padding: 16px;
+  padding: 18px;
   vertical-align: middle;
 }
 
 .token-info {
-  min-width: 200px;
+  min-width: 220px;
 }
 
 .token-details {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 .token-logo {
-  font-size: 24px;
-  width: 32px;
+  font-size: 28px;
+  width: 36px;
   text-align: center;
 }
 
 .token-name {
   font-weight: 500;
   color: var(--text-primary);
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .token-symbol {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--text-muted);
   text-transform: uppercase;
 }
@@ -284,7 +533,7 @@
 }
 
 .balance-symbol {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--text-muted);
   text-transform: uppercase;
 }
@@ -309,13 +558,13 @@
 .change-content {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
 }
 
 .allocation-content {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
   min-width: 80px;
 }
 
@@ -331,23 +580,23 @@
   height: 100%;
   background-color: var(--accent-blue);
   border-radius: 2px;
-  transition: width 0.3s ease;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .action-buttons {
   display: flex;
-  gap: 6px;
+  gap: 8px;
   align-items: center;
 }
 
 .btn-sm {
-  padding: 4px 8px;
-  font-size: 12px;
+  padding: 6px 10px;
+  font-size: 14px;
   font-weight: 500;
 }
 
 .btn-icon {
-  padding: 4px;
+  padding: 6px;
   min-width: auto;
 }
 
@@ -359,15 +608,15 @@
 .transactions-list {
   display: flex;
   flex-direction: column;
-  gap: 1px;
-  margin-top: 16px;
+  gap: 2px;
+  margin-top: 20px;
 }
 
 .transaction-item {
   background-color: var(--bg-tertiary);
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .transaction-item:hover {
@@ -378,24 +627,24 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
+  padding: 18px;
 }
 
 .transaction-type {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 .transaction-icon {
-  padding: 8px;
-  border-radius: 8px;
+  padding: 10px;
+  border-radius: 10px;
   background-color: var(--bg-secondary);
 }
 
 .transaction-icon.buy {
   color: var(--profit-green);
-  background-color: rgba(16, 185, 129, 0.1);
+  background-color: rgba(16, 216, 118, 0.1);
 }
 
 .transaction-icon.sell {
@@ -406,18 +655,18 @@
 .transaction-details {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 .transaction-action {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .action-text {
   font-weight: 500;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .action-text.buy {
@@ -436,8 +685,8 @@
 .transaction-meta {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 12px;
+  gap: 10px;
+  font-size: 14px;
   color: var(--text-muted);
 }
 
@@ -445,12 +694,12 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 4px;
+  gap: 6px;
 }
 
 .amount {
   font-weight: 600;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .amount.buy {
@@ -464,8 +713,8 @@
 .transaction-status {
   display: flex;
   align-items: center;
-  gap: 4px;
-  font-size: 12px;
+  gap: 6px;
+  font-size: 14px;
 }
 
 .status-icon.completed {
@@ -507,14 +756,14 @@
 
 .empty-state p {
   margin: 0;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 /* Responsive Design */
 @media (max-width: 1200px) {
   .portfolio-summary {
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: 24px;
   }
   
   .portfolio-grid {
@@ -528,38 +777,38 @@
   }
   
   .main-value {
-    font-size: 28px;
+    font-size: 32px;
   }
   
   .value {
-    font-size: 20px;
+    font-size: 24px;
   }
   
   .portfolio-chart {
-    height: 300px;
+    height: 320px;
   }
   
   .chart-container {
-    height: 240px;
+    height: 260px;
   }
   
   .token-table {
-    font-size: 14px;
+    font-size: 16px;
   }
   
   .token-table td {
-    padding: 12px 8px;
+    padding: 14px 10px;
   }
   
   .action-buttons {
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
   }
   
   .transaction-main {
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
+    gap: 14px;
   }
   
   .transaction-amount {

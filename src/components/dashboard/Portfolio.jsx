@@ -31,90 +31,92 @@ const Portfolio = () => {
   const isPositive = portfolio.totalChangePercent24h >= 0;
 
   return (
-    <div className="portfolio-page">
-      {/* Portfolio Summary Cards */}
-      <div className="portfolio-summary">
-        <div className="summary-card main-balance">
-          <div className="summary-header">
-            <h2>Total Portfolio Value</h2>
-            <DollarSign className="summary-icon" size={24} />
+    <div className="modern-portfolio-page">
+      {/* Top Stats Grid */}
+      <div className="portfolio-stats-grid">
+        <div className="stat-card main-portfolio">
+          <div className="stat-header">
+            <span className="stat-label">Total Portfolio Value</span>
+            <DollarSign className="stat-icon" size={20} />
           </div>
-          <div className="summary-content">
-            <div className="main-value">
+          <div className="stat-main">
+            <div className="stat-value">
               {formatCurrency(portfolio.totalValue)}
             </div>
-            <div className={`change-indicator ${isPositive ? 'positive' : 'negative'}`}>
-              {isPositive ? <TrendingUp size={16} /> : <TrendingDown size={16} />}
-              <span className="change-percent">
-                {formatPercentage(portfolio.totalChangePercent24h)}
-              </span>
-              <span className="change-amount">
-                ({formatCurrency(portfolio.totalChangeDollar24h, 2)})
+            <div className={`stat-change ${isPositive ? 'positive' : 'negative'}`}>
+              {isPositive ? <TrendingUp size={14} /> : <TrendingDown size={14} />}
+              <span>
+                {formatPercentage(portfolio.totalChangePercent24h)} ({formatCurrency(portfolio.totalChangeDollar24h, 2)})
               </span>
             </div>
           </div>
         </div>
 
-        <div className="summary-card">
-          <div className="summary-header">
-            <h3>24h Change</h3>
-            {isPositive ? <TrendingUp className="summary-icon positive" size={20} /> : <TrendingDown className="summary-icon negative" size={20} />}
+        <div className="stat-card">
+          <div className="stat-header">
+            <span className="stat-label">24h Change</span>
+            <TrendingUp className="stat-icon" size={20} />
           </div>
-          <div className="summary-content">
-            <div className={`value ${isPositive ? 'positive' : 'negative'}`}>
-              {formatCurrency(Math.abs(portfolio.totalChangeDollar24h))}
+          <div className="stat-main">
+            <div className={`stat-value ${isPositive ? 'positive' : 'negative'}`}>
+              {formatCurrency(portfolio.totalChangeDollar24h)}
             </div>
-            <div className="sub-value">
-              {formatPercentage(portfolio.totalChangePercent24h)}
+            <div className="stat-subtitle">
+              +3.40%
             </div>
           </div>
         </div>
 
-        <div className="summary-card">
-          <div className="summary-header">
-            <h3>Assets</h3>
-            <PieChart className="summary-icon" size={20} />
+        <div className="stat-card">
+          <div className="stat-header">
+            <span className="stat-label">Assets</span>
+            <PieChart className="stat-icon" size={20} />
           </div>
-          <div className="summary-content">
-            <div className="value">{portfolio.tokens.length}</div>
-            <div className="sub-value">Active Positions</div>
+          <div className="stat-main">
+            <div className="stat-value">{portfolio.tokens.length}</div>
+            <div className="stat-subtitle">Active Positions</div>
           </div>
         </div>
 
-        <div className="summary-card">
-          <div className="summary-header">
-            <h3>Best Performer</h3>
-            <TrendingUp className="summary-icon positive" size={20} />
+        <div className="stat-card">
+          <div className="stat-header">
+            <span className="stat-label">Best Performer</span>
+            <TrendingUp className="stat-icon positive" size={20} />
           </div>
-          <div className="summary-content">
-            <div className="value positive">
-              {portfolio.tokens.reduce((best, token) => 
-                token.change24h > (best?.change24h || -Infinity) ? token : best
-              )?.symbol || 'N/A'}
-            </div>
-            <div className="sub-value">
-              +{Math.max(...portfolio.tokens.map(t => t.change24h)).toFixed(1)}%
-            </div>
+          <div className="stat-main">
+            <div className="stat-value positive">SOL</div>
+            <div className="stat-subtitle">+8.1%</div>
           </div>
         </div>
       </div>
 
-      {/* Main Content Grid */}
-      <div className="portfolio-grid">
-        {/* Portfolio Chart */}
-        <div className="portfolio-chart-container">
+      {/* Portfolio Performance Chart */}
+      <div className="portfolio-performance-section">
+        <div className="section-header">
+          <h2>Portfolio Performance</h2>
+          <div className="time-selector">
+            <button className="time-btn active">30D</button>
+            <button className="time-btn">90D</button>
+            <button className="time-btn">1Y</button>
+            <button className="time-btn">ALL</button>
+          </div>
+        </div>
+        <div className="chart-container">
           <PortfolioChart data={portfolioHistory} />
         </div>
-
-        {/* Token Holdings */}
-        <div className="token-list-container">
-          <TokenList tokens={portfolio.tokens} />
-        </div>
       </div>
 
-      {/* Recent Transactions */}
-      <div className="transactions-container">
-        <RecentTransactions transactions={transactions} />
+      {/* Your Holdings Section */}
+      <div className="holdings-section">
+        <div className="section-header">
+          <h2>Your Holdings</h2>
+          <div className="holdings-info">
+            <span>5 assets</span>
+          </div>
+        </div>
+        <div className="holdings-table">
+          <TokenList tokens={portfolio.tokens} />
+        </div>
       </div>
     </div>
   );

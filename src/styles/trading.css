@@ -85,9 +85,9 @@
 
 /* Trading Pairs */
 .trading-pairs {
-  background-color: var(--bg-secondary);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0)) , var(--bg-secondary);
   border: 1px solid var(--border-color);
-  border-radius: 8px;
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -102,9 +102,9 @@
 .pairs-search {
   width: 100%;
   padding: 8px 12px 8px 32px;
-  background-color: var(--bg-tertiary);
+  background-color: rgba(26, 35, 61, 0.85);
   border: 1px solid var(--border-color);
-  border-radius: 6px;
+  border-radius: 10px;
   color: var(--text-primary);
   font-size: 14px;
   outline: none;
@@ -289,8 +289,9 @@
 
 .chart-type-btn.active {
   background-color: var(--accent-blue);
-  color: white;
+  color: #f0f6ff;
   border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px var(--ring-blue);
 }
 
 .volume-toggle {
@@ -309,8 +310,9 @@
 
 .volume-toggle.active {
   background-color: var(--accent-blue);
-  color: white;
+  color: #f0f6ff;
   border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px var(--ring-blue);
 }
 
 .chart-settings-btn {
@@ -500,7 +502,9 @@
 
 .orderbook-control-btn.active {
   background-color: var(--accent-blue);
-  color: white;
+  color: #081120;
+  color: #f0f6ff;
+  box-shadow: 0 0 0 3px var(--ring-blue);
 }
 
 .buy-icon {
@@ -567,7 +571,7 @@
 .side-btn {
   padding: 12px;
   border: 1px solid var(--border-color);
-  border-radius: 6px;
+  border-radius: 10px;
   background: none;
   color: var(--text-secondary);
   cursor: pointer;
