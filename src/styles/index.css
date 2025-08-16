@@ -4,42 +4,42 @@
 @import './pages.css';
 @import './trading.css';
 
-/* Dark Theme Base Styles */
+/* Premium Fintech Theme */
 :root {
-  /* Navy/Blue palette (Modern and sleek) */
-  --bg-primary: #0b0f1a;           /* page background - deeper */
-  --bg-secondary: #111827;         /* surfaces/cards */
-  --bg-tertiary: #1f2937;          /* elevated surfaces */
-  --bg-elevated: #0f172a;          /* headers/nav */
-  --bg-glass: rgba(17, 24, 39, 0.8); /* glass surfaces */
-  --bg-card: rgba(31, 41, 55, 0.6); /* card background */
+  /* Deep black premium palette */
+  --bg-primary: #000000;           /* pure black background */
+  --bg-secondary: #0a0a0a;         /* card backgrounds */
+  --bg-tertiary: #151515;          /* elevated surfaces */
+  --bg-elevated: #0f0f0f;          /* headers/nav */
+  --bg-glass: rgba(10, 10, 10, 0.95); /* glass surfaces */
+  --bg-card: rgba(15, 15, 15, 0.8); /* premium card background */
 
-  --text-primary: #f9fafb;
-  --text-secondary: #d1d5db;
-  --text-muted: #9ca3af;
+  --text-primary: #ffffff;         /* pure white for primary text */
+  --text-secondary: #e5e5e5;       /* light gray for secondary */
+  --text-muted: #8e8e93;           /* muted gray */
 
-  --accent-blue: #60a5fa;          /* light blue */
-  --accent-blue-hover: #3b82f6;    /* brighter on hover */
-  --accent-blue-light: #93c5fd;    /* lighter variant */
-  --accent-blue-dark: #1e40af;     /* darker variant */
-  --ring-blue: rgba(96, 165, 250, 0.2);
+  --accent-blue: #00d4ff;          /* electric cyan blue */
+  --accent-blue-hover: #00bfea;    /* darker cyan on hover */
+  --accent-blue-light: #4de2ff;    /* lighter cyan */
+  --accent-blue-dark: #0099cc;     /* darker variant */
+  --ring-blue: rgba(0, 212, 255, 0.3);
 
-  --profit-green: #10b981;         /* emerald green */
-  --profit-green-light: #34d399;   /* lighter green */
-  --loss-red: #ef4444;             /* red */
-  --loss-red-light: #f87171;       /* lighter red */
+  --profit-green: #00ff88;         /* electric green */
+  --profit-green-light: #4dffaa;   /* lighter green */
+  --loss-red: #ff3b5c;             /* electric red */
+  --loss-red-light: #ff6b82;       /* lighter red */
 
-  --border-color: rgba(75, 85, 99, 0.3);         /* subtle border */
-  --border-color-strong: rgba(75, 85, 99, 0.5);
-  --border-highlight: rgba(96, 165, 250, 0.3);
-  --hover-bg: rgba(55, 65, 81, 0.5);
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  --glow-blue: 0 0 20px rgba(96, 165, 250, 0.1);
-  --glow-green: 0 0 20px rgba(16, 185, 129, 0.1);
+  --border-color: rgba(255, 255, 255, 0.08);    /* subtle white border */
+  --border-color-strong: rgba(255, 255, 255, 0.15);
+  --border-highlight: rgba(0, 212, 255, 0.4);
+  --hover-bg: rgba(255, 255, 255, 0.05);
+  --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 8px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 20px -3px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 30px -5px rgba(0, 0, 0, 0.6);
+  --shadow-2xl: 0 30px 60px -12px rgba(0, 0, 0, 0.7);
+  --glow-blue: 0 0 30px rgba(0, 212, 255, 0.3);
+  --glow-green: 0 0 30px rgba(0, 255, 136, 0.3);
 }
 
 * {
@@ -54,7 +54,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, var(--bg-primary) 0%, #0c1220 100%);
+  background: var(--bg-primary);
   color: var(--text-primary);
   overflow-x: hidden;
   min-height: 100vh;
@@ -62,6 +62,20 @@ body {
 
 #root {
   min-height: 100vh;
+}
+
+/* Radial page glow like the reference */
+.main-content::after {
+  content: '';
+  position: fixed;
+  right: -20%;
+  bottom: -20%;
+  width: 60vw;
+  height: 60vh;
+  pointer-events: none;
+  background: radial-gradient(closest-side, rgba(0, 212, 255, 0.2), rgba(0, 212, 255, 0.1), rgba(0,0,0,0));
+  filter: blur(20px);
+  z-index: 0;
 }
 
 /* Scrollbar Styles */
@@ -116,14 +130,16 @@ body {
 
 .btn-primary {
   background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-hover));
-  color: #0a0f1c;
-  box-shadow: 0 4px 15px rgba(96, 165, 250, 0.3);
-  border: 1px solid rgba(96, 165, 250, 0.2);
+  color: #000000;
+  box-shadow: 0 4px 20px rgba(0, 212, 255, 0.4);
+  border: 1px solid var(--accent-blue);
+  font-weight: 700;
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(96, 165, 250, 0.4);
+  box-shadow: 0 8px 30px rgba(0, 212, 255, 0.6), var(--glow-blue);
+  background: linear-gradient(135deg, var(--accent-blue-light), var(--accent-blue));
 }
 
 .btn-success {
@@ -163,19 +179,17 @@ body {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Modern Card Styles */
+/* Premium Fintech Card Styles */
 .card {
   background: linear-gradient(145deg, 
-    rgba(255, 255, 255, 0.08) 0%, 
-    rgba(255, 255, 255, 0.03) 50%,
-    rgba(255, 255, 255, 0.01) 100%
-  ), var(--bg-card);
+    rgba(255, 255, 255, 0.03) 0%, 
+    rgba(255, 255, 255, 0.01) 50%,
+    rgba(0, 0, 0, 0.2) 100%
+  ), var(--bg-secondary);
   border: 1px solid var(--border-color);
-  border-radius: 20px;
+  border-radius: 16px;
   padding: 24px;
-  box-shadow: var(--shadow-lg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-lg), inset 0 0 0 1px rgba(255, 255, 255, 0.04);
   position: relative;
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -188,19 +202,19 @@ body {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  opacity: 1;
+  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.3), transparent);
+  opacity: 0.6;
 }
 
 .card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-xl);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-xl), var(--glow-blue);
   border-color: var(--border-highlight);
   background: linear-gradient(145deg, 
-    rgba(255, 255, 255, 0.1) 0%, 
-    rgba(255, 255, 255, 0.05) 50%,
-    rgba(255, 255, 255, 0.02) 100%
-  ), var(--bg-card);
+    rgba(255, 255, 255, 0.05) 0%, 
+    rgba(255, 255, 255, 0.02) 50%,
+    rgba(0, 0, 0, 0.3) 100%
+  ), var(--bg-secondary);
 }
 
 .card-header {
@@ -217,8 +231,9 @@ body {
   left: 0;
   width: 60px;
   height: 2px;
-  background: linear-gradient(90deg, var(--accent-blue), var(--profit-green));
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-blue-light));
   border-radius: 1px;
+  box-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
 }
 
 /* Enhanced Glass Surface */
@@ -239,6 +254,17 @@ body {
   position: relative;
 }
 
+/* Grain texture overlay utility (applied to cards that need premium texture) */
+.has-grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.25;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.08"/></svg>');
+  mix-blend-mode: overlay;
+}
+
 .glass-surface::before {
   content: '';
   position: absolute;
@@ -251,7 +277,7 @@ body {
 
 /* Gradient Text Effects */
 .gradient-text {
-  background: linear-gradient(135deg, var(--accent-blue), var(--profit-green));
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-light));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

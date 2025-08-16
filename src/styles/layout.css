@@ -17,6 +17,7 @@
   overflow-y: auto;
   margin-left: 280px;
   transition: margin-left 0.3s ease;
+  position: relative;
 }
 
 .main-content.sidebar-collapsed {

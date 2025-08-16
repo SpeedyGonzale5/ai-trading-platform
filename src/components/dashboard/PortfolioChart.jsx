@@ -118,15 +118,34 @@ const PortfolioChart = ({ data }) => {
       {
         label: 'Portfolio Value',
         data: data.map(item => item.value),
-        borderColor: '#10b981',
-        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+        borderColor: '#00d4ff',
+        borderWidth: 2,
+        segment: {
+          // Add subtle glow-like shadow effect
+          borderColor: '#00d4ff',
+        },
+        backgroundColor: (context) => {
+          const { chart } = context;
+          const { ctx, chartArea } = chart || {};
+          if (!chartArea) return 'rgba(0, 212, 255, 0.08)';
+          const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
+          gradient.addColorStop(0, 'rgba(0, 212, 255, 0.20)');
+          gradient.addColorStop(1, 'rgba(0, 212, 255, 0.00)');
+          return gradient;
+        },
         fill: true,
+        pointRadius: 0,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: '#ffffff',
+        pointHoverBorderColor: '#00d4ff',
+        pointHoverBorderWidth: 2,
+        tension: 0.35,
       },
     ],
   };
 
   return (
-    <div className="portfolio-chart card">
+    <div className="portfolio-chart card has-grain">
       <div className="card-header">
         <h3>Portfolio Performance</h3>
         <div className="chart-timeframe">
