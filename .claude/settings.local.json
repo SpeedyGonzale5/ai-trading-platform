@@ -16,7 +16,8 @@
       "mcp__my-server__browser_click",
       "mcp__my-server__browser_take_screenshot",
       "mcp__my-server__browser_resize",
-      "mcp__my-server__browser_console_messages"
+      "mcp__my-server__browser_console_messages",
+      "mcp__playwright__browser_console_messages"
     ]
   }
 }
