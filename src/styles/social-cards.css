@@ -1,0 +1,274 @@
+/* Crypto Top Cards for Social Feed - Reference Design Match */
+.crypto-top-cards-section {
+  margin-bottom: 32px;
+  padding: 0 24px;
+}
+
+.crypto-top-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Reference-style crypto card */
+.crypto-top-card {
+  background: 
+    rgba(42, 42, 42, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 24px;
+  height: 240px;
+  width: 340px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Spotlight gradient effect - critical for premium look */
+.crypto-top-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 0.08) 0%, 
+    rgba(255, 255, 255, 0.04) 20%,
+    rgba(255, 255, 255, 0.02) 40%,
+    transparent 100%);
+  border-radius: 16px 16px 0 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.crypto-top-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(48, 48, 48, 0.95);
+  box-shadow: 
+    0 8px 30px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+}
+
+/* Card Header */
+.crypto-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 3;
+}
+
+.crypto-icon-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.crypto-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  position: relative;
+  z-index: 4;
+}
+
+.crypto-label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.crypto-symbol {
+  font-size: 12px;
+  color: #a0a0a0;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.crypto-name {
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* Change Badge */
+.change-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  min-width: 65px;
+  justify-content: center;
+  position: relative;
+  z-index: 3;
+}
+
+.change-badge.positive {
+  background: #00c851;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 200, 81, 0.3);
+}
+
+.change-badge.negative {
+  background: #ff4444;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(255, 68, 68, 0.3);
+}
+
+.change-icon {
+  font-size: 8px;
+  line-height: 1;
+}
+
+.change-text {
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* Price Section */
+.crypto-price-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 3;
+}
+
+.crypto-amount {
+  font-size: 32px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.crypto-value {
+  font-size: 15px;
+  color: #a8a8a8;
+  font-weight: 500;
+  line-height: 1;
+}
+
+/* Chart Section */
+.crypto-chart-section {
+  flex: 1;
+  position: relative;
+  z-index: 3;
+  margin-top: auto;
+}
+
+/* Override chart container for social cards */
+.crypto-top-card .crypto-chart-container {
+  height: 80px;
+  margin: 0;
+  position: relative;
+}
+
+.crypto-top-card .chart-value-label {
+  position: absolute;
+  bottom: 4px;
+  right: 8px;
+  z-index: 4;
+}
+
+.crypto-top-card .chart-value {
+  font-size: 10px;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+/* Brand-specific spotlight enhancements */
+.crypto-top-card:nth-child(1)::before {
+  background: linear-gradient(180deg, 
+    rgba(247, 147, 26, 0.12) 0%, 
+    rgba(255, 255, 255, 0.06) 20%,
+    rgba(255, 255, 255, 0.03) 40%,
+    transparent 100%);
+}
+
+.crypto-top-card:nth-child(2)::before {
+  background: linear-gradient(180deg, 
+    rgba(98, 126, 234, 0.12) 0%, 
+    rgba(255, 255, 255, 0.06) 20%,
+    rgba(255, 255, 255, 0.03) 40%,
+    transparent 100%);
+}
+
+.crypto-top-card:nth-child(3)::before {
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 0.10) 0%, 
+    rgba(255, 255, 255, 0.05) 20%,
+    rgba(255, 255, 255, 0.02) 40%,
+    transparent 100%);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .crypto-top-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  
+  .crypto-top-card {
+    width: auto;
+    height: 160px;
+    padding: 16px;
+  }
+  
+  .crypto-amount {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .crypto-top-cards-section {
+    padding: 0 16px;
+  }
+  
+  .crypto-top-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    max-width: 320px;
+  }
+  
+  .crypto-top-card {
+    width: 100%;
+    height: 140px;
+  }
+  
+  .crypto-amount {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .crypto-top-cards-grid {
+    max-width: 100%;
+  }
+}

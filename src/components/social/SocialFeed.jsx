@@ -1,5 +1,7 @@
 import React from 'react';
 import { MessageCircle, Twitter, Activity } from 'lucide-react';
+import CryptoTopCards from './CryptoTopCards';
+import '../../styles/social-cards.css';
 
 const SocialFeed = () => {
   return (
@@ -8,6 +10,9 @@ const SocialFeed = () => {
         <h1>Social Feed</h1>
         <p>Monitor market sentiment through social media and whale tracking</p>
       </div>
+
+      {/* Crypto Top Cards Section */}
+      <CryptoTopCards />
 
       <div className="coming-soon">
         <MessageCircle size={64} className="coming-soon-icon" />

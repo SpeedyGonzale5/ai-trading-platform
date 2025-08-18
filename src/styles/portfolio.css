@@ -33,10 +33,16 @@
 }
 
 @keyframes float-particles {
-  0% { transform: translateY(0px) translateX(0px); }
-  33% { transform: translateY(-10px) translateX(5px); }
-  66% { transform: translateY(5px) translateX(-5px); }
-  100% { transform: translateY(0px) translateX(0px); }
+  0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.6; }
+  25% { transform: translateY(-8px) translateX(3px); opacity: 0.8; }
+  50% { transform: translateY(-5px) translateX(-2px); opacity: 0.4; }
+  75% { transform: translateY(3px) translateX(4px); opacity: 0.7; }
+}
+
+@keyframes particle-glow {
+  0%, 100% { opacity: 0.3; }
+  33% { opacity: 0.7; }
+  66% { opacity: 0.5; }
 }
 
 /* Grain texture overlay */
@@ -76,14 +82,16 @@
 
 .top-coins-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
+  gap: 24px;
   margin-bottom: 32px;
+  max-width: 1500px;
+  justify-content: center;
 }
 
 @media (min-width: 1200px) {
   .top-coins-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -92,11 +100,19 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
+  
+  .top-coin-card {
+    height: 100px;  /* Slightly smaller on mobile */
+  }
 }
 
 @media (max-width: 480px) {
   .top-coins-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .top-coin-card {
+    height: 110px;  /* Good height for single column */
   }
 }
 
@@ -108,377 +124,270 @@
   margin-bottom: 32px;
 }
 
-/* Reference-Style Coin Cards with Gradients */
+/* Clean Glassmorphism Card Design - Reference Match */
 .top-coin-card {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 0;
+  background: 
+    rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 32px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.02);
   position: relative;
   overflow: hidden;
-  min-height: 260px;
+  width: 370px;
+  height: 270px;
   display: flex;
   flex-direction: column;
-  backdrop-filter: blur(10px);
+  backdrop-filter: saturate(180%) blur(25px);
+  -webkit-backdrop-filter: saturate(180%) blur(25px);
+  cursor: pointer;
 }
 
 .top-coin-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.15);
-  border-color: var(--border-highlight);
-  background: linear-gradient(145deg, var(--bg-secondary), rgba(59, 130, 246, 0.02));
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: saturate(180%) blur(30px);
+  -webkit-backdrop-filter: saturate(180%) blur(30px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Subtle hover effects - matching reference design */
+.glassmorphism-card:hover {
+  box-shadow: 
+    0 6px 20px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255,255,255,0.12);
 }
 
 .top-coin-card:hover .mini-chart path {
-  filter: drop-shadow(0 0 12px currentColor) drop-shadow(0 0 24px rgba(59, 130, 246, 0.4));
-  stroke-width: 3.5;
+  opacity: 1;
+  stroke-width: 1.2;
 }
 
-.top-coin-card:hover .mini-chart svg {
-  transform: scale(1.02);
-}
 
-.top-coin-card:hover .coin-logo {
-  transform: scale(1.1);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-}
 
-.top-coin-card:hover .coin-change-badge {
-  transform: scale(1.05);
-}
-
-.top-coin-card:hover .coin-balance h4 {
-  transform: translateY(-1px);
-}
-
-/* Card shimmer effect on hover */
-.top-coin-card::after {
+/* Extremely subtle top gradient spotlight - barely visible premium depth */
+.glassmorphism-card::before {
   content: '';
   position: absolute;
   top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.04), transparent);
-  transition: left 0.6s ease;
+  left: 0;
+  right: 0;
+  height: 35%;
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 0.03) 0%, 
+    rgba(255, 255, 255, 0.015) 35%,
+    transparent 100%);
+  border-radius: 16px 16px 0 0;
   pointer-events: none;
-  border-radius: inherit;
+  z-index: 1;
+  opacity: 1;
 }
+
+/* Bitcoin - Enhanced spotlight with brand accent */
+.glassmorphism-card:nth-child(1) {
+  background: 
+    radial-gradient(ellipse 80% 50% at center 20%, rgba(255,165,0,0.12) 0%, rgba(255,165,0,0.06) 50%, transparent 80%),
+    rgba(255, 255, 255, 0.04);
+  border-color: rgba(255,165,0,0.15);
+}
+
+.glassmorphism-card:nth-child(1)::before {
+  background: linear-gradient(180deg, 
+    rgba(255, 165, 0, 0.04) 0%, 
+    rgba(255, 255, 255, 0.02) 20%,
+    rgba(255, 255, 255, 0.01) 35%,
+    transparent 100%);
+}
+
+
+
+/* Ethereum - Enhanced spotlight with brand accent */
+.glassmorphism-card:nth-child(2) {
+  background: 
+    radial-gradient(ellipse 80% 50% at center 20%, rgba(100,149,237,0.12) 0%, rgba(100,149,237,0.06) 50%, transparent 80%),
+    rgba(255, 255, 255, 0.04);
+  border-color: rgba(100,149,237,0.15);
+}
+
+.glassmorphism-card:nth-child(2)::before {
+  background: linear-gradient(180deg, 
+    rgba(100, 149, 237, 0.04) 0%, 
+    rgba(255, 255, 255, 0.02) 20%,
+    rgba(255, 255, 255, 0.01) 35%,
+    transparent 100%);
+}
+
+
+
+/* BNB - Enhanced spotlight with brand accent */
+.glassmorphism-card:nth-child(3) {
+  background: 
+    radial-gradient(ellipse 80% 50% at center 20%, rgba(243,186,47,0.12) 0%, rgba(243,186,47,0.06) 50%, transparent 80%),
+    rgba(255, 255, 255, 0.04);
+  border-color: rgba(243,186,47,0.15);
+}
+
+.glassmorphism-card:nth-child(3)::before {
+  background: linear-gradient(180deg, 
+    rgba(243, 186, 47, 0.04) 0%, 
+    rgba(255, 255, 255, 0.02) 20%,
+    rgba(255, 255, 255, 0.01) 35%,
+    transparent 100%);
+}
+
+
+
+/* Solana - Enhanced spotlight with brand accent */
+.glassmorphism-card:nth-child(4) {
+  background: 
+    radial-gradient(ellipse 80% 50% at center 20%, rgba(147,51,234,0.12) 0%, rgba(147,51,234,0.06) 50%, transparent 80%),
+    rgba(255, 255, 255, 0.04);
+  border-color: rgba(147,51,234,0.15);
+}
+
+.glassmorphism-card:nth-child(4)::before {
+  background: linear-gradient(180deg, 
+    rgba(147, 51, 234, 0.04) 0%, 
+    rgba(255, 255, 255, 0.02) 20%,
+    rgba(255, 255, 255, 0.01) 35%,
+    transparent 100%);
+}
+
+
+
+/* Cardano - Enhanced spotlight with brand accent */
+.glassmorphism-card:nth-child(5) {
+  background: 
+    radial-gradient(ellipse 80% 50% at center 20%, rgba(0,51,173,0.12) 0%, rgba(0,51,173,0.06) 50%, transparent 80%),
+    rgba(255, 255, 255, 0.04);
+  border-color: rgba(0,51,173,0.15);
+}
+
+.glassmorphism-card:nth-child(5)::before {
+  background: linear-gradient(180deg, 
+    rgba(0, 51, 173, 0.04) 0%, 
+    rgba(255, 255, 255, 0.02) 20%,
+    rgba(255, 255, 255, 0.01) 35%,
+    transparent 100%);
+}
+
+
 
 .top-coin-card:hover::after {
   left: 100%;
 }
 
-/* Enhanced Crypto-Branded Card Gradients - Reference Design Match */
-.btc-card {
-  background: 
-    radial-gradient(ellipse 80% 50% at 50% 15%, rgba(247, 147, 26, 0.25) 0%, rgba(247, 147, 26, 0.12) 40%, transparent 70%),
-    linear-gradient(135deg, rgba(247, 147, 26, 0.08) 0%, rgba(255, 165, 0, 0.04) 50%, var(--bg-secondary) 100%);
-  border: 1px solid rgba(247, 147, 26, 0.2);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    0 2px 8px rgba(247, 147, 26, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  position: relative;
-  overflow: hidden;
-}
 
-.btc-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 30% 20%, rgba(247, 147, 26, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 70% 80%, rgba(255, 165, 0, 0.1) 0%, transparent 50%);
-  pointer-events: none;
-  border-radius: inherit;
-}
 
-.btc-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 
-    0 16px 48px rgba(0, 0, 0, 0.4),
-    0 4px 16px rgba(247, 147, 26, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
-  border-color: rgba(247, 147, 26, 0.4);
-}
+/* Removed btc-card::before */
 
-.eth-card {
-  background: 
-    radial-gradient(ellipse 80% 50% at 50% 15%, rgba(98, 126, 234, 0.25) 0%, rgba(98, 126, 234, 0.12) 40%, transparent 70%),
-    linear-gradient(135deg, rgba(98, 126, 234, 0.08) 0%, rgba(59, 130, 246, 0.04) 50%, var(--bg-secondary) 100%);
-  border: 1px solid rgba(98, 126, 234, 0.2);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    0 2px 8px rgba(98, 126, 234, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  position: relative;
-  overflow: hidden;
-}
+/* Removed btc-card:hover */
 
-.eth-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 30% 20%, rgba(98, 126, 234, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 70% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
-  pointer-events: none;
-  border-radius: inherit;
-}
 
-.eth-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 
-    0 16px 48px rgba(0, 0, 0, 0.4),
-    0 4px 16px rgba(98, 126, 234, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
-  border-color: rgba(98, 126, 234, 0.4);
-}
 
-.bnb-card {
-  background: 
-    radial-gradient(ellipse 80% 50% at 50% 15%, rgba(243, 186, 47, 0.25) 0%, rgba(243, 186, 47, 0.12) 40%, transparent 70%),
-    linear-gradient(135deg, rgba(243, 186, 47, 0.08) 0%, rgba(255, 193, 7, 0.04) 50%, var(--bg-secondary) 100%);
-  border: 1px solid rgba(243, 186, 47, 0.2);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    0 2px 8px rgba(243, 186, 47, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  position: relative;
-  overflow: hidden;
-}
+/* Removed eth-card::before */
 
-.bnb-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 30% 20%, rgba(243, 186, 47, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 70% 80%, rgba(255, 193, 7, 0.1) 0%, transparent 50%);
-  pointer-events: none;
-  border-radius: inherit;
-}
+/* Removed eth-card:hover */
 
-.bnb-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 
-    0 16px 48px rgba(0, 0, 0, 0.4),
-    0 4px 16px rgba(243, 186, 47, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
-  border-color: rgba(243, 186, 47, 0.4);
-}
 
-.sol-card {
-  background: 
-    radial-gradient(ellipse 80% 50% at 50% 15%, rgba(153, 69, 255, 0.25) 0%, rgba(153, 69, 255, 0.12) 40%, transparent 70%),
-    linear-gradient(135deg, rgba(153, 69, 255, 0.08) 0%, rgba(168, 85, 247, 0.04) 50%, var(--bg-secondary) 100%);
-  border: 1px solid rgba(153, 69, 255, 0.2);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    0 2px 8px rgba(153, 69, 255, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  position: relative;
-  overflow: hidden;
-}
 
-.sol-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 30% 20%, rgba(153, 69, 255, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 70% 80%, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
-  pointer-events: none;
-  border-radius: inherit;
-}
+/* Removed bnb-card::before */
 
-.sol-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 
-    0 16px 48px rgba(0, 0, 0, 0.4),
-    0 4px 16px rgba(153, 69, 255, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
-  border-color: rgba(153, 69, 255, 0.4);
-}
+/* Removed bnb-card:hover */
 
-.ada-card {
-  background: 
-    radial-gradient(ellipse 80% 50% at 50% 15%, rgba(0, 51, 173, 0.25) 0%, rgba(0, 51, 173, 0.12) 40%, transparent 70%),
-    linear-gradient(135deg, rgba(0, 51, 173, 0.08) 0%, rgba(37, 99, 235, 0.04) 50%, var(--bg-secondary) 100%);
-  border: 1px solid rgba(0, 51, 173, 0.2);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    0 2px 8px rgba(0, 51, 173, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  position: relative;
-  overflow: hidden;
-}
 
-.ada-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 30% 20%, rgba(0, 51, 173, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 70% 80%, rgba(37, 99, 235, 0.1) 0%, transparent 50%);
-  pointer-events: none;
-  border-radius: inherit;
-}
 
-.ada-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 
-    0 16px 48px rgba(0, 0, 0, 0.4),
-    0 4px 16px rgba(0, 51, 173, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
-  border-color: rgba(0, 51, 173, 0.4);
-}
+/* Removed sol-card::before */
 
-/* Promotional Card - Reference Design Style */
+/* Removed sol-card:hover */
+
+
+
+/* Removed ada-card::before */
+
+/* Removed ada-card:hover */
+
+/* Clean Promo Card - Reference Style */
 .promo-card {
   background: 
-    radial-gradient(ellipse 100% 60% at 50% 0%, rgba(20, 184, 166, 0.25) 0%, rgba(6, 182, 212, 0.15) 40%, transparent 80%),
-    linear-gradient(135deg, rgba(20, 184, 166, 0.1) 0%, rgba(6, 182, 212, 0.08) 50%, var(--bg-secondary) 100%);
+    linear-gradient(135deg, 
+      rgba(20, 184, 166, 0.15) 0%, 
+      rgba(6, 182, 212, 0.1) 50%,
+      rgba(20, 184, 166, 0.05) 100%);
   border: 1px solid rgba(20, 184, 166, 0.3);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    0 2px 8px rgba(20, 184, 166, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
   position: relative;
   overflow: hidden;
   cursor: pointer;
 }
 
-.promo-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 30% 20%, rgba(20, 184, 166, 0.2) 0%, transparent 50%),
-    radial-gradient(circle at 70% 80%, rgba(6, 182, 212, 0.15) 0%, transparent 50%);
-  pointer-events: none;
-  border-radius: inherit;
-}
+/* Removed promo-card::before */
 
-.promo-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 
-    0 16px 48px rgba(0, 0, 0, 0.4),
-    0 4px 16px rgba(20, 184, 166, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
-  border-color: rgba(20, 184, 166, 0.5);
-}
+/* Removed promo-card:hover */
 
 .promo-content {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   height: 100%;
-  padding: 24px;
   position: relative;
-  z-index: 10;
+  z-index: 2;
 }
 
-.promo-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.promo-icon {
-  width: 48px;
-  height: 48px;
-  background: linear-gradient(135deg, rgba(20, 184, 166, 0.2) 0%, rgba(6, 182, 212, 0.1) 100%);
-  border: 2px solid rgba(20, 184, 166, 0.4);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  font-weight: 700;
-  color: #14B8A6;
-  margin: 0 auto 16px auto;
-  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.2);
-}
-
-.promo-header h3 {
-  font-size: 18px;
-  font-weight: 800;
-  color: var(--text-primary);
-  margin: 0 0 4px 0;
-  line-height: 1.1;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.promo-header p {
-  font-size: 14px;
-  color: var(--text-muted);
-  margin: 0;
-  line-height: 1.2;
-  font-weight: 500;
-}
-
-.promo-description {
+.promo-text {
+  text-align: left;
   flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  margin: 16px 0;
 }
 
-.promo-description p {
-  font-size: 13px;
-  color: var(--text-muted);
-  line-height: 1.4;
+
+
+.promo-text h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
   margin: 0;
-  white-space: pre-line;
-  opacity: 0.9;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
 }
 
-.promo-btn {
+.promo-text p {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin: 2px 0 0 0;
+  line-height: 1;
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+
+
+
+
+.promo-button {
   background: linear-gradient(135deg, #14B8A6, #06B6D4);
   color: #FFFFFF;
   border: none;
-  border-radius: 8px;
-  padding: 12px 20px;
-  font-size: 14px;
-  font-weight: 700;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 11px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 
-    0 4px 12px rgba(20, 184, 166, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
+  flex-shrink: 0;
+  margin-left: 12px;
 }
 
-.promo-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 
-    0 6px 20px rgba(20, 184, 166, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+.promo-button:hover {
+  transform: translateY(-1px);
   background: linear-gradient(135deg, #0D9488, #0891B2);
+  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3);
 }
 
 .stat-card {
@@ -1235,154 +1144,191 @@
 
 /* Coin Cards Grid */
 /* Reference-style coin card layout */
-.coin-gradient-header {
+.coin-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 20px 24px 16px 24px;
+  align-items: flex-start;
+  margin-bottom: 28px;
   position: relative;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, transparent 100%);
+  z-index: 3;
 }
 
 .coin-logo {
-  width: 40px;
-  height: 40px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 18px;
   flex-shrink: 0;
-  box-shadow: 
-    0 4px 12px rgba(0, 0, 0, 0.25),
-    0 2px 4px rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 10;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(4px);
-}
-
-.coin-name-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  flex: 1;
-  margin: 0 16px;
-}
-
-.coin-name-center h3 {
-  font-size: 19px;
-  font-weight: 900;
-  color: var(--text-primary);
-  margin: 0 0 6px 0;
-  line-height: 1.05;
-  letter-spacing: 0.01em;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
   position: relative;
   z-index: 10;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.coin-name-center p {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin: 0;
-  line-height: 1.2;
-  font-weight: 500;
-  opacity: 0.9;
-}
-
-.coin-change-badge {
-  padding: 8px 14px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 700;
-  min-width: 70px;
-  text-align: center;
-  flex-shrink: 0;
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  position: relative;
-  z-index: 10;
-  letter-spacing: 0.025em;
-}
-
-.coin-change-badge.positive {
-  background: 
-    linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%),
-    rgba(59, 130, 246, 0.08);
-  color: #FFFFFF;
-  border: 1px solid rgba(59, 130, 246, 0.4);
-  box-shadow: 
-    0 2px 8px rgba(59, 130, 246, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-.coin-change-badge.negative {
-  background: 
-    linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(239, 68, 68, 0.1) 100%),
-    rgba(239, 68, 68, 0.08);
-  color: #FFFFFF;
-  border: 1px solid rgba(239, 68, 68, 0.4);
-  box-shadow: 
-    0 2px 8px rgba(239, 68, 68, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-.coin-stats {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
-  padding: 0 24px 24px 24px;
-  margin-top: auto;
-}
-
-.coin-balance {
+.coin-title {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  text-align: left;
+  flex: 1;
+  margin: 0 8px;
 }
 
-.coin-balance h4 {
-  font-size: 22px;
-  font-weight: 900;
+.coin-title h3 {
+  font-size: 17px;
+  font-weight: 800;
   color: var(--text-primary);
-  margin: 0 0 6px 0;
-  line-height: 1.05;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  letter-spacing: -0.01em;
-  position: relative;
-  z-index: 10;
-}
-
-.coin-balance p {
-  font-size: 14px;
-  color: var(--text-muted);
   margin: 0;
-  line-height: 1.2;
-  font-weight: 600;
-  opacity: 0.85;
+  line-height: 1;
+  letter-spacing: 0.02em;
   position: relative;
-  z-index: 10;
+  z-index: 3;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
 }
 
-.mini-chart {
-  height: 90px;
+.coin-title p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 3px 0 0 0;
+  line-height: 1;
+  font-weight: 500;
+  opacity: 0.8;
   position: relative;
-  padding: 16px 24px;
-  margin: 12px 0;
+  z-index: 3;
+}
+
+.coin-change {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  min-width: 60px;
+  text-align: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.coin-change.positive {
+  color: #FFFFFF;
+  background: #22C55E;
+  border-color: rgba(34, 197, 94, 0.6);
+  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.4);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.coin-change.negative {
+  color: #FFFFFF;
+  background: #EF4444;
+  border-color: rgba(239, 68, 68, 0.6);
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.coin-value {
+  margin-top: auto;
+  text-align: center;
+  position: relative;
+  z-index: 3;
+}
+
+/* New reference-style main values section - matching Image 2 layout */
+.coin-main-values {
+  text-align: left;
+  margin: 20px 0 24px 0;
+  position: relative;
+  z-index: 3;
   flex: 1;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  background: 
-    linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
-    radial-gradient(ellipse 100% 60% at 50% 100%, rgba(59, 130, 246, 0.03) 0%, transparent 70%);
-  border-radius: 8px;
-  z-index: 2;
+}
+
+.crypto-amount {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 12px 0;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.usd-amount {
+  font-size: 16px;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+/* Enhanced chart container - reference style */
+.crypto-chart-container {
+  margin-top: auto;
+  height: 80px;
+  width: 100%;
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+  padding-top: 8px;
+}
+
+.chart-value-label {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  z-index: 4;
+}
+
+.chart-value {
+  font-size: 11px;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.chart-value.positive {
+  color: #3B82F6;
+}
+
+.chart-value.negative {
+  color: #EF4444;
+}
+
+
+
+.main-value {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+}
+
+.sub-value {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 3px 0 0 0;
+  line-height: 1;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.coin-chart {
+  height: 30px;
+  margin: 12px 0;
+  flex: 1;
+  position: relative;
+  z-index: 3;
 }
 
 .mini-chart svg {
@@ -1390,37 +1336,15 @@
   height: 100%;
 }
 
-.mini-chart path {
-  stroke-width: 3;
-  fill: none;
-  filter: drop-shadow(0 0 8px currentColor) drop-shadow(0 0 16px rgba(59, 130, 246, 0.4));
-  opacity: 1;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
 
-.mini-chart.positive {
-  color: var(--accent-blue);
-}
 
-.mini-chart.negative {
-  color: var(--loss-red);
-}
 
-.mini-chart.positive path {
-  stroke: url(#blueGradient);
-}
 
-.mini-chart.positive svg {
-  filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.3));
-}
 
-.mini-chart.negative path {
-  stroke: url(#redGradient);
-}
 
-.mini-chart.negative svg {
-  filter: drop-shadow(0 0 12px rgba(239, 68, 68, 0.3));
-}
+
+
+
 
 .coin-card {
   background: linear-gradient(to bottom, #0D0F14 0%, #1A1E27 100%);
@@ -2105,5 +2029,53 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
+  }
+}
+
+/* Enhanced chart styling and animations */
+.crypto-chart-container .recharts-wrapper {
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+}
+
+.crypto-chart-container .recharts-area {
+  filter: drop-shadow(0 0 4px currentColor);
+}
+
+/* Chart glow effect animation */
+@keyframes chart-glow {
+  0%, 100% { filter: drop-shadow(0 0 3px currentColor); }
+  50% { filter: drop-shadow(0 0 6px currentColor); }
+}
+
+.crypto-chart-container:hover .recharts-area {
+  animation: chart-glow 3s ease-in-out infinite;
+}
+
+/* Chart dots styling */
+.crypto-chart-container .recharts-dot {
+  filter: drop-shadow(0 0 4px currentColor);
+}
+
+.crypto-chart-container .recharts-active-dot {
+  filter: drop-shadow(0 0 8px currentColor) !important;
+}
+
+/* Enhanced particle float timing */
+@keyframes enhanced-particle-float {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px) rotate(0deg); 
+    opacity: 0.6; 
+  }
+  25% { 
+    transform: translateY(-12px) translateX(4px) rotate(2deg); 
+    opacity: 0.9; 
+  }
+  50% { 
+    transform: translateY(-8px) translateX(-3px) rotate(-1deg); 
+    opacity: 0.4; 
+  }
+  75% { 
+    transform: translateY(4px) translateX(6px) rotate(1deg); 
+    opacity: 0.8; 
   }
 }
