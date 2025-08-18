@@ -24,6 +24,42 @@ ChartJS.register(
   Filler
 );
 
+// Custom glow effect plugin
+const glowPlugin = {
+  id: 'glow',
+  beforeDatasetsDraw: (chart) => {
+    const { ctx, data } = chart;
+    const dataset = data.datasets[0];
+    const points = chart.getDatasetMeta(0).data;
+
+    if (points && points.length > 0) {
+      ctx.save();
+      
+      // Create glow effect
+      ctx.shadowColor = '#3B82F6';
+      ctx.shadowBlur = 15;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 0;
+      
+      // Draw the line path for glow
+      ctx.beginPath();
+      points.forEach((point, index) => {
+        if (index === 0) {
+          ctx.moveTo(point.x, point.y);
+        } else {
+          ctx.lineTo(point.x, point.y);
+        }
+      });
+      
+      ctx.strokeStyle = '#3B82F6';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+      
+      ctx.restore();
+    }
+  }
+};
+
 const PortfolioChart = ({ data }) => {
   const chartRef = useRef();
 
@@ -39,13 +75,14 @@ const PortfolioChart = ({ data }) => {
         display: false,
       },
       tooltip: {
-        backgroundColor: 'rgba(42, 42, 42, 0.95)',
+        backgroundColor: 'rgba(13, 15, 20, 0.95)',
         titleColor: '#ffffff',
-        bodyColor: '#b3b3b3',
-        borderColor: '#404040',
-        borderWidth: 1,
-        cornerRadius: 8,
+        bodyColor: '#9CA3AF',
+        borderColor: 'rgba(59, 130, 246, 0.3)',
+        borderWidth: 2,
+        cornerRadius: 12,
         displayColors: false,
+        boxShadow: '0 0 30px rgba(59, 130, 246, 0.3)',
         callbacks: {
           title: (tooltipItems) => {
             const date = new Date(tooltipItems[0].label);
@@ -66,12 +103,17 @@ const PortfolioChart = ({ data }) => {
       x: {
         display: true,
         grid: {
-          color: 'rgba(64, 64, 64, 0.3)',
+          color: 'rgba(255, 255, 255, 0.05)',
           drawBorder: false,
+          lineWidth: 1,
         },
         ticks: {
-          color: '#b3b3b3',
+          color: '#9CA3AF',
           maxTicksLimit: 8,
+          font: {
+            size: 12,
+            weight: 500,
+          },
           callback: function(value, index) {
             const date = new Date(this.getLabelForValue(value));
             return date.toLocaleDateString('en-US', {
@@ -85,11 +127,16 @@ const PortfolioChart = ({ data }) => {
         display: true,
         position: 'right',
         grid: {
-          color: 'rgba(64, 64, 64, 0.3)',
+          color: 'rgba(255, 255, 255, 0.05)',
           drawBorder: false,
+          lineWidth: 1,
         },
         ticks: {
-          color: '#b3b3b3',
+          color: '#9CA3AF',
+          font: {
+            size: 12,
+            weight: 500,
+          },
           callback: function(value) {
             return formatCurrency(value, 0);
           },
@@ -118,45 +165,62 @@ const PortfolioChart = ({ data }) => {
       {
         label: 'Portfolio Value',
         data: data.map(item => item.value),
-        borderColor: '#00d4ff',
+        borderColor: '#3B82F6',
         borderWidth: 2,
         segment: {
-          // Add subtle glow-like shadow effect
-          borderColor: '#00d4ff',
+          borderColor: '#3B82F6',
         },
         backgroundColor: (context) => {
           const { chart } = context;
           const { ctx, chartArea } = chart || {};
-          if (!chartArea) return 'rgba(0, 212, 255, 0.08)';
+          if (!chartArea) return 'rgba(59, 130, 246, 0.1)';
           const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
-          gradient.addColorStop(0, 'rgba(0, 212, 255, 0.20)');
-          gradient.addColorStop(1, 'rgba(0, 212, 255, 0.00)');
+          gradient.addColorStop(0, 'rgba(59, 130, 246, 0.3)');
+          gradient.addColorStop(0.3, 'rgba(59, 130, 246, 0.15)');
+          gradient.addColorStop(0.7, 'rgba(59, 130, 246, 0.05)');
+          gradient.addColorStop(1, 'rgba(59, 130, 246, 0)');
           return gradient;
         },
         fill: true,
-        pointRadius: 0,
-        pointHoverRadius: 5,
+        pointRadius: (context) => {
+          // Show highlight point on the last data point
+          const index = context.dataIndex;
+          const isLast = index === data.length - 1;
+          return isLast ? 6 : 0;
+        },
+        pointBackgroundColor: (context) => {
+          const index = context.dataIndex;
+          const isLast = index === data.length - 1;
+          return isLast ? '#ffffff' : 'transparent';
+        },
+        pointBorderColor: (context) => {
+          const index = context.dataIndex;
+          const isLast = index === data.length - 1;
+          return isLast ? '#3B82F6' : 'transparent';
+        },
+        pointBorderWidth: 3,
+        pointHoverRadius: 8,
         pointHoverBackgroundColor: '#ffffff',
-        pointHoverBorderColor: '#00d4ff',
-        pointHoverBorderWidth: 2,
-        tension: 0.35,
+        pointHoverBorderColor: '#3B82F6',
+        pointHoverBorderWidth: 3,
+        tension: 0.4,
+        shadowColor: 'rgba(59, 130, 246, 0.6)',
+        shadowBlur: 15,
+        shadowOffsetX: 0,
+        shadowOffsetY: 0,
       },
     ],
   };
 
   return (
     <div className="portfolio-chart card has-grain">
-      <div className="card-header">
-        <h3>Portfolio Performance</h3>
-        <div className="chart-timeframe">
-          <button className="timeframe-btn active">30D</button>
-          <button className="timeframe-btn">90D</button>
-          <button className="timeframe-btn">1Y</button>
-          <button className="timeframe-btn">ALL</button>
-        </div>
-      </div>
       <div className="chart-container">
-        <Line ref={chartRef} data={chartData} options={options} />
+        <Line 
+          ref={chartRef} 
+          data={chartData} 
+          options={options} 
+          plugins={[glowPlugin]}
+        />
       </div>
     </div>
   );

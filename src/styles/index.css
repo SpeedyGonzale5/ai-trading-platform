@@ -4,42 +4,42 @@
 @import './pages.css';
 @import './trading.css';
 
-/* Premium Fintech Theme */
+/* Sophisticated Crypto Dashboard Theme - Exact Reference Design Match */
 :root {
-  /* Deep black premium palette */
-  --bg-primary: #000000;           /* pure black background */
-  --bg-secondary: #0a0a0a;         /* card backgrounds */
-  --bg-tertiary: #151515;          /* elevated surfaces */
-  --bg-elevated: #0f0f0f;          /* headers/nav */
-  --bg-glass: rgba(10, 10, 10, 0.95); /* glass surfaces */
-  --bg-card: rgba(15, 15, 15, 0.8); /* premium card background */
+  /* Dark theme palette exactly matching the reference */
+  --bg-primary: #0B0B0F;           /* deepest black background - exact match */
+  --bg-secondary: #1A1D29;         /* card backgrounds - reference gray tone */
+  --bg-tertiary: #2A2D39;          /* elevated surfaces */
+  --bg-elevated: #141419;          /* headers/nav - very dark */
+  --bg-glass: rgba(26, 29, 41, 0.95); /* glass surfaces */
+  --bg-card: rgba(26, 29, 41, 0.95); /* professional card background */
 
-  --text-primary: #ffffff;         /* pure white for primary text */
-  --text-secondary: #e5e5e5;       /* light gray for secondary */
-  --text-muted: #8e8e93;           /* muted gray */
+  --text-primary: #FFFFFF;         /* pure white for primary text */
+  --text-secondary: #E5E7EB;       /* light gray for secondary */
+  --text-muted: #9CA3AF;           /* medium gray matching reference exactly */
 
-  --accent-blue: #00d4ff;          /* electric cyan blue */
-  --accent-blue-hover: #00bfea;    /* darker cyan on hover */
-  --accent-blue-light: #4de2ff;    /* lighter cyan */
-  --accent-blue-dark: #0099cc;     /* darker variant */
-  --ring-blue: rgba(0, 212, 255, 0.3);
+  --accent-blue: #00a8ff;          /* bright blue accent from reference */
+  --accent-blue-hover: #0088cc;    /* darker blue on hover */
+  --accent-blue-light: #33b8ff;    /* lighter blue */
+  --accent-blue-dark: #0077aa;     /* darker variant */
+  --ring-blue: rgba(0, 168, 255, 0.3);
 
-  --profit-green: #00ff88;         /* electric green */
-  --profit-green-light: #4dffaa;   /* lighter green */
-  --loss-red: #ff3b5c;             /* electric red */
+  --profit-green: #00a8ff;         /* use blue for positive (matching reference) */
+  --profit-green-light: #33b8ff;   /* lighter blue */
+  --loss-red: #ff4757;             /* red/orange for negative */
   --loss-red-light: #ff6b82;       /* lighter red */
 
-  --border-color: rgba(255, 255, 255, 0.08);    /* subtle white border */
-  --border-color-strong: rgba(255, 255, 255, 0.15);
-  --border-highlight: rgba(0, 212, 255, 0.4);
-  --hover-bg: rgba(255, 255, 255, 0.05);
-  --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 8px -1px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 10px 20px -3px rgba(0, 0, 0, 0.5);
-  --shadow-xl: 0 20px 30px -5px rgba(0, 0, 0, 0.6);
-  --shadow-2xl: 0 30px 60px -12px rgba(0, 0, 0, 0.7);
-  --glow-blue: 0 0 30px rgba(0, 212, 255, 0.3);
-  --glow-green: 0 0 30px rgba(0, 255, 136, 0.3);
+  --border-color: rgba(255, 255, 255, 0.06);    /* subtle border - exact reference match */
+  --border-color-strong: rgba(255, 255, 255, 0.12);
+  --border-highlight: rgba(0, 168, 255, 0.4);
+  --hover-bg: rgba(255, 255, 255, 0.06);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.6);
+  --shadow-2xl: 0 24px 48px rgba(0, 0, 0, 0.7);
+  --glow-blue: 0 0 20px rgba(0, 168, 255, 0.3);
+  --glow-green: 0 0 20px rgba(0, 168, 255, 0.3);
 }
 
 * {
@@ -49,7 +49,7 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -58,6 +58,8 @@ body {
   color: var(--text-primary);
   overflow-x: hidden;
   min-height: 100vh;
+  line-height: 1.5;
+  font-weight: 400;
 }
 
 #root {
@@ -193,6 +195,23 @@ body {
   position: relative;
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Gradient outline ring for cards without extra DOM */
+.card.gradient-outline {
+  border: 1px solid transparent;
+  border-image: conic-gradient(
+    from 180deg at 50% 50%,
+    rgba(0, 212, 255, 0.55),
+    rgba(59, 130, 246, 0.45),
+    rgba(168, 85, 247, 0.40),
+    rgba(0, 212, 255, 0.55)
+  ) 1;
+  box-shadow: var(--shadow-lg), 0 0 18px rgba(0, 212, 255, 0.08);
+}
+
+.card.gradient-outline:hover {
+  box-shadow: var(--shadow-xl), 0 0 26px rgba(0, 212, 255, 0.12);
 }
 
 .card::before {
