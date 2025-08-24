@@ -59,7 +59,287 @@
   mix-blend-mode: multiply;
 }
 
-/* Top Coins Grid - Matching Reference Layout */
+/* New Layout Structure */
+.top-section-layout {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.bottom-section-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+  align-items: stretch;
+}
+
+/* Balance Section */
+.balance-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.balance-section .stat-card {
+  height: auto;
+  min-height: 300px;
+}
+
+/* Top Coins Horizontal Section */
+.top-coins-section-horizontal {
+  display: flex;
+  flex-direction: column;
+}
+
+.top-coins-horizontal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  flex: 1;
+}
+
+.top-coins-horizontal-grid .top-coin-card {
+  width: auto;
+  height: auto;
+  min-height: 120px;
+  max-height: 140px;
+}
+
+/* Bottom Section Cards */
+.markets-section,
+.quick-swap-section,
+.promo-section {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Markets Section */
+.markets-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 16px;
+}
+
+.market-item {
+  display: grid;
+  grid-template-columns: 140px 60px 80px 60px;
+  gap: 12px;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.market-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.market-coin-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.market-name {
+  font-size: 14px;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.market-chart {
+  width: 50px;
+  height: 16px;
+}
+
+.market-price {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: right;
+}
+
+.market-change {
+  font-size: 12px;
+  font-weight: 600;
+  text-align: right;
+}
+
+.market-change.positive {
+  color: var(--profit-green);
+}
+
+.market-change.negative {
+  color: var(--loss-red);
+}
+
+.learn-more-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.learn-more-btn:hover {
+  color: var(--text-primary);
+  background: var(--hover-bg);
+}
+
+/* Quick Swap Section */
+.all-currencies {
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--bg-tertiary);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.swap-interface {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.swap-input {
+  background: var(--bg-tertiary);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.input-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.token-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.token-icon {
+  width: 24px;
+  height: 24px;
+  background: var(--accent-blue);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: white;
+  font-weight: 700;
+}
+
+.amount-input {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 16px;
+  font-weight: 600;
+  text-align: right;
+  outline: none;
+  width: 120px;
+}
+
+.balance-text {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.swap-arrows {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.arrows-icon {
+  color: var(--text-muted);
+  font-size: 16px;
+}
+
+/* Promo Section - Unlimited Access Card */
+.promo-section {
+  background: linear-gradient(135deg, #14B8A6 0%, #06B6D4 50%, #0891B2 100%) !important;
+  border: 1px solid rgba(20, 184, 166, 0.3) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.promo-icon-star {
+  font-size: 24px;
+  color: #FFD700;
+  text-align: center;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.5));
+}
+
+.promo-content h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  margin: 0 0 4px 0;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.promo-content p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 8px 0;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.promo-desc {
+  font-size: 12px !important;
+  line-height: 1.4;
+  margin-bottom: 20px !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.promo-button {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  backdrop-filter: blur(10px);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.promo-button:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Legacy - Top Coins Grid - Matching Reference Layout */
 .my-top-coins-section {
   margin-bottom: 32px;
 }
@@ -131,7 +411,7 @@
     #1e293b;
   border: 1px solid rgba(139, 92, 246, 0.2);
   border-radius: 16px;
-  padding: 32px;
+  padding: 16px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 
     0 4px 6px rgba(0, 0, 0, 0.1), 
@@ -1149,7 +1429,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 28px;
+  margin-bottom: 12px;
   position: relative;
   z-index: 3;
 }
@@ -1241,7 +1521,7 @@
 /* New reference-style main values section - matching Image 2 layout */
 .coin-main-values {
   text-align: left;
-  margin: 20px 0 24px 0;
+  margin: 8px 0 12px 0;
   position: relative;
   z-index: 3;
   flex: 1;
@@ -1251,10 +1531,10 @@
 }
 
 .crypto-amount {
-  font-size: 36px;
+  font-size: 24px;
   font-weight: 800;
   color: var(--text-primary);
-  margin: 0 0 12px 0;
+  margin: 0 0 6px 0;
   line-height: 1.1;
   letter-spacing: -0.02em;
   text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
@@ -1325,8 +1605,8 @@
 }
 
 .coin-chart {
-  height: 30px;
-  margin: 12px 0;
+  height: 20px;
+  margin: 6px 0;
   flex: 1;
   position: relative;
   z-index: 3;
