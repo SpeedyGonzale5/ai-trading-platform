@@ -265,18 +265,48 @@
 }
 
 .token-card {
-  background-color: var(--bg-tertiary);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 16px;
-  transition: all 0.2s ease;
+  background: rgba(42, 42, 42, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   cursor: pointer;
 }
 
+/* Spotlight gradient effect */
+.token-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 0.08) 0%, 
+    rgba(255, 255, 255, 0.04) 20%,
+    rgba(255, 255, 255, 0.02) 40%,
+    transparent 100%);
+  border-radius: 16px 16px 0 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
 .token-card:hover {
-  border-color: var(--accent-blue);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(48, 48, 48, 0.95);
+  box-shadow: 
+    0 8px 30px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
 }
 
 .token-header {
@@ -284,6 +314,8 @@
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 12px;
+  position: relative;
+  z-index: 3;
 }
 
 .token-info {
@@ -300,7 +332,10 @@
   align-items: center;
   justify-content: center;
   background-color: var(--bg-secondary);
-  border-radius: 6px;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  position: relative;
+  z-index: 4;
 }
 
 .token-details {
@@ -346,6 +381,8 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 12px;
+  position: relative;
+  z-index: 3;
 }
 
 .metric {
@@ -370,6 +407,8 @@
 .token-chart {
   margin-bottom: 12px;
   height: 40px;
+  position: relative;
+  z-index: 3;
 }
 
 .mini-chart {
@@ -381,6 +420,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  z-index: 3;
 }
 
 .token-time {
@@ -403,19 +444,23 @@
 }
 
 .buy-btn {
-  padding: 6px 12px;
-  background-color: var(--profit-green);
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #00c851, #059669);
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 200, 81, 0.3);
+  position: relative;
 }
 
 .buy-btn:hover {
-  background-color: #059669;
+  background: linear-gradient(135deg, #059669, #00c851);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 200, 81, 0.4);
 }
 
 /* Page-specific styles */
