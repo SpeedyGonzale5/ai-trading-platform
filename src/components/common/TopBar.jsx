@@ -34,7 +34,7 @@ const TopBar = () => {
       <div className="topbar-left">
         <div className="logo">
           <span className="logo-icon">▲</span>
-          <span className="logo-text">Axiom</span>
+          <span className="logo-text">Point</span>
         </div>
         
         <nav className="main-nav">
@@ -60,7 +60,7 @@ const TopBar = () => {
           <input 
             type="text" 
             className="search-input-modern" 
-            placeholder="Search tokens, pairs, or addresses..."
+            placeholder="Search stocks, symbols, or companies..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -70,15 +70,15 @@ const TopBar = () => {
       <div className="topbar-right">
         <div className="quick-stats">
           <div className="stat-item">
-            <span className="stat-label">ETH</span>
+            <span className="stat-label">AAPL</span>
             <span className="stat-value positive">+2.56%</span>
           </div>
           <div className="stat-item">
-            <span className="stat-label">BTC</span>
+            <span className="stat-label">GOOGL</span>
             <span className="stat-value positive">+1.34%</span>
           </div>
           <div className="stat-item">
-            <span className="stat-label">SOL</span>
+            <span className="stat-label">META</span>
             <span className="stat-value negative">-1.45%</span>
           </div>
         </div>

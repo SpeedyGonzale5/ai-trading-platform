@@ -1,105 +1,101 @@
 import React from 'react';
 import CryptoChart from '../dashboard/CryptoChart';
 
-const CryptoTopCards = () => {
-  // Mock data matching the reference image
-  const cryptoData = [
+const StockTopCards = () => {
+  // Mock data for major stocks
+  const stockData = [
     {
       id: 1,
-      symbol: 'BTC',
-      name: 'Bitcoin',
-      amount: '0.823075',
+      symbol: 'AAPL',
+      name: 'Apple Inc.',
+      amount: '306.7',
       value: 57096.48,
       change24h: 1.63,
       chartValue: -2058.40,
-      price: 69500,
-      balance: 0.823075
+      price: 186.12,
+      balance: 306.7
     },
     {
       id: 2,
-      symbol: 'ETH',
-      name: 'Ethereum',
-      amount: '2.9383',
+      symbol: 'GOOGL',
+      name: 'Alphabet Inc.',
+      amount: '75.0',
       value: 10793.64,
       change24h: -0.84,
       chartValue: -811.73,
-      price: 3673,
-      balance: 2.9383
+      price: 143.95,
+      balance: 75.0
     },
     {
       id: 3,
-      symbol: 'SOL',
-      name: 'Solana',
-      amount: '419.68',
+      symbol: 'META',
+      name: 'Meta Platforms',
+      amount: '1304.2',
       value: 67108.32,
       change24h: -3.09,
       chartValue: -4194.23,
-      price: 159.85,
-      balance: 419.68
+      price: 51.45,
+      balance: 1304.2
     }
   ];
 
   return (
     <div className="crypto-top-cards-section">
       <div className="crypto-top-cards-grid">
-        {cryptoData.map((crypto, index) => (
-          <div key={crypto.id} className={`crypto-top-card glassmorphism-card`}>
+        {stockData.map((stock, index) => (
+          <div key={stock.id} className={`crypto-top-card glassmorphism-card`}>
             {/* Header Section */}
             <div className="crypto-card-header">
               <div className="crypto-icon-wrapper">
                 <div className="crypto-icon">
-                  {crypto.symbol === 'BTC' && (
+                  {stock.symbol === 'AAPL' && (
                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-                      <circle cx="12" cy="12" r="12" fill="#F7931A"/>
-                      <path d="M17.207 10.534c.118-1.283-.783-1.978-2.118-2.436l.433-1.735-1.055-.263-.422 1.69a52.01 52.01 0 00-.845-.2l.425-1.704-1.055-.263-.433 1.735c-.228-.052-.452-.101-.669-.154l.001-.005-1.456-.363-.281 1.127s.783.18.766.191c.426.106.503.39.49.614l-.49 1.963c.029.008.067.019.109.037l-.111-.028-.686 2.75c-.052.128-.184.321-.481.248.01.015-.767-.191-.767-.191l-.524 1.208 1.374.343c.255.064.505.131.751.194l-.437 1.754 1.055.263.433-1.735c.286.078.564.15.837.218l-.431 1.73 1.055.263.437-1.752c1.788.338 3.132.202 3.695-1.415.454-1.305-.023-2.058-1.25-2.547.89-.205 1.56-.791 1.739-2z" fill="white"/>
+                      <circle cx="12" cy="12" r="12" fill="#000000"/>
+                      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" fill="white"/>
                     </svg>
                   )}
-                  {crypto.symbol === 'ETH' && (
+                  {stock.symbol === 'GOOGL' && (
                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-                      <circle cx="12" cy="12" r="12" fill="#627EEA"/>
-                      <path d="M12 4l-5.5 9.19L12 16l5.5-2.81L12 4z" fill="white" opacity="0.6"/>
-                      <path d="M12 4l-5.5 9.19L12 11.24V4z" fill="white"/>
-                      <path d="M12 16.96L6.5 14.44L12 20l5.5-5.56L12 16.96z" fill="white" opacity="0.6"/>
-                      <path d="M12 16.96v3.04l5.5-5.56L12 16.96z" fill="white"/>
+                      <circle cx="12" cy="12" r="12" fill="#4285F4"/>
+                      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="white"/>
+                      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="white"/>
+                      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="white"/>
+                      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="white"/>
                     </svg>
                   )}
-                  {crypto.symbol === 'SOL' && (
+                  {stock.symbol === 'META' && (
                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-                      <circle cx="12" cy="12" r="12" fill="#FFFFFF"/>
-                      <g transform="translate(6, 8)">
-                        <rect x="0" y="0" width="12" height="1.5" fill="#000000" rx="0.75"/>
-                        <rect x="0" y="3.25" width="12" height="1.5" fill="#000000" rx="0.75"/>
-                        <rect x="0" y="6.5" width="12" height="1.5" fill="#000000" rx="0.75"/>
-                      </g>
+                      <circle cx="12" cy="12" r="12" fill="#1877F2"/>
+                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="white"/>
                     </svg>
                   )}
                 </div>
                 <div className="crypto-label">
-                  <div className="crypto-symbol">{crypto.symbol}</div>
-                  <div className="crypto-name">{crypto.name}</div>
+                  <div className="crypto-symbol">{stock.symbol}</div>
+                  <div className="crypto-name">{stock.name}</div>
                 </div>
               </div>
               
               {/* Change Badge */}
-              <div className={`change-badge ${crypto.change24h >= 0 ? 'positive' : 'negative'}`}>
+              <div className={`change-badge ${stock.change24h >= 0 ? 'positive' : 'negative'}`}>
                 <span className="change-icon">
-                  {crypto.change24h >= 0 ? '▲' : '▼'}
+                  {stock.change24h >= 0 ? '▲' : '▼'}
                 </span>
                 <span className="change-text">
-                  {crypto.change24h >= 0 ? '+' : ''}{crypto.change24h.toFixed(2)}%
+                  {stock.change24h >= 0 ? '+' : ''}{stock.change24h.toFixed(2)}%
                 </span>
               </div>
             </div>
 
             {/* Price Section */}
             <div className="crypto-price-section">
-              <div className="crypto-amount">{crypto.amount}</div>
-              <div className="crypto-value">${crypto.value.toLocaleString(undefined, {maximumFractionDigits: 2})}</div>
+              <div className="crypto-amount">{stock.amount}</div>
+              <div className="crypto-value">${stock.value.toLocaleString(undefined, {maximumFractionDigits: 2})}</div>
             </div>
 
             {/* Chart Section */}
             <div className="crypto-chart-section">
-              <CryptoChart crypto={crypto} />
+              <CryptoChart crypto={stock} />
             </div>
           </div>
         ))}
@@ -108,4 +104,4 @@ const CryptoTopCards = () => {
   );
 };
 
-export default CryptoTopCards;
+export default StockTopCards;
