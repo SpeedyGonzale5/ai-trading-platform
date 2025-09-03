@@ -22,13 +22,13 @@ const Sidebar = ({ collapsed, onToggle }) => {
       path: '/trading', 
       icon: TrendingUp, 
       label: 'Trading',
-      description: 'Buy & sell crypto'
+      description: 'Buy & sell stocks'
     },
     { 
       path: '/discover', 
       icon: Compass, 
       label: 'Discover',
-      description: 'Find new tokens'
+      description: 'Find new stocks'
     },
     { 
       path: '/calendar', 
